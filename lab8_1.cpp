@@ -3,28 +3,81 @@
 using namespace std;
 
 int main(){	
+	double loan,interest_R,amount;
 
-	//use 'setw' to set width of table and 'left' to set left-alignment
-	//you can change input argument of 'setw()' to see the effect
-	//Try to change from 'left' to 'right' and see the effect
+	cout << "Enter initial loan: ";
+	cin >> loan;
+	cout << "Enter interest rate per year (%): ";
+	cin >> interest_R;
+	cout << "Enter amount you can pay per year: ";
+	cin >> amount;
+
+
+
+
+
 	cout << setw(13) << left << "EndOfYear#"; 
 	cout << setw(13) << left << "PrevBalance"; 
 	cout << setw(13) << left << "Interest"; 
 	cout << setw(13) << left << "Total";
 	cout << setw(13) << left << "Payment";
-	cout << setw(13) << left << "NewBalance";
+	cout << setw(13) << left << "";
 	cout << "\n";
+
+
+
+
+	double NewBalance,Total,Interest,PrevBalance,Payment;
+	int EndOfYear = 1;
+
+	PrevBalance = loan;
+	Interest = loan*(interest_R/100);
+	Total = PrevBalance+Interest;
+	Payment = amount;
+	if (Payment >= Total)
+	{
+		Payment = Total;
+	}
 	
-	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
-	//you can change input argument of 'setprecision()' to see the effect
+	NewBalance = Total-Payment;
+
+
+
+	while (1)
+	{
+	
 	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
+	cout << setw(13) << left << EndOfYear; 
+	cout << setw(13) << left << PrevBalance;
+	cout << setw(13) << left << Interest;
+	cout << setw(13) << left << Total;
+	cout << setw(13) << left << Payment;
+	cout << setw(13) << left << NewBalance;
+	cout << "\n";
+
+	PrevBalance = NewBalance;
+	Interest = PrevBalance*(interest_R/100);
+	Total = PrevBalance+Interest;
+
+	if (NewBalance <= Payment)
+	{
+		Payment = Total;
+	}
+	else
+	{
+		Payment = amount;
+	}
 	
+	NewBalance = Total-Payment;
+	EndOfYear++;
+	
+	
+	if (PrevBalance <= 0) break;	
+
+
+	}
+
+
 	return 0;
 }
+
